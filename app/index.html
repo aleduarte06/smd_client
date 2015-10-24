@@ -12,14 +12,18 @@
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
 </head>
 
 <body ng-app="myApp">
-<div class="container">
+<div id="home" class="content has-bg home">
+    <div class="content-bg">
+        <img src="img/home-bg.jpg" alt="Home" />
+    </div>
+    <div class="container">
     <header class="row">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-static-top">
             <ul class="nav navbar-nav nav-tabs">
                 <li><a ui-sref="view1">view1</a></li>
                 <li><a ui-sref="view2">view2</a></li>
@@ -29,14 +33,7 @@
     <div ui-view class="container-fluid">
 
     </div>
-
-    <footer class="panel-footer">
-        <ul class="breadcrumb">
-            <li><a href="#">link 1</a></li>
-            <li><a href="#">link 2</a></li>
-            <li><a href="#">link 3</a></li>
-        </ul>
-    </footer>
+</div>
 </div>
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
