@@ -2063,6 +2063,7 @@ legend {
     width: 256px;
 }
 .media.media-sm .media-object {
+    margin-top: 10px;
     width: 64px;
 }
 .media.media-xs .media-object {
@@ -2087,9 +2088,18 @@ legend {
 }
 .media-list.media-list-with-divider > li + li {
     border-top: 1px solid #eee;
-    padding-top: 20px;
+    /*padding-top: 20px;*/
 }
 
+.media {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/*.media:first-child {*/
+    /*margin-bottom: 10px !important;*/
+    /*margin-top: 10px !important;*/
+/*}*/
 
 /* 3.20 Component - Table */
 

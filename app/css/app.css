@@ -110,12 +110,22 @@ html{
 /*content bg*/
 
 .contenedor-index{
-    margin-top: 50px; !important;
-    height: 700px;
+    margin-top: 20px; !important;
+
 
 }
 .front-twits{
     overflow: hidden;
     font-size: 1.8em;
-    height: 700px;
+    height: 680px;
+}
+
+.panel-body {
+    height: 680px;
+    padding-top: 18px;
+}
+
+li {
+    height: 155px;
+    position: relative;
 }

@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('myApp.view1', ['ui.router', 'luegg.directives'])
-
+angular.module('myApp.view1', ['ui.router', 'luegg.directives', 'ngAnimate'])
     .config(function($stateProvider) {
         $stateProvider.state('view1', {
             url: '/view1',
@@ -9,7 +8,6 @@ angular.module('myApp.view1', ['ui.router', 'luegg.directives'])
             controller: 'View1Ctrl'
         });
     })
-
     .controller('View1Ctrl', function($scope, $http) {
         $scope.tweets = [];
 
@@ -26,13 +24,18 @@ angular.module('myApp.view1', ['ui.router', 'luegg.directives'])
 
         setInterval(function () {
             $scope.obtainTweets(1, function (data) {
-                $scope.tweets.push(data[0])
-            })
-        }, 1000);
+                if (data.length){
+                    if ($scope.tweets.length >= 9){
+                        var element = document.querySelector('.media-list').firstElementChild;
+                            $scope.tweets.splice(0,1);
+                            $scope.tweets.push(data[0]);
 
-        if ($scope.tweets.length === 0 ) {
-            $scope.obtainTweets(4, function (data) {
-                $scope.tweets = data
-            });
-        }
+                    } else {
+                        $scope.tweets.push(data[0]);
+                    }
+                    console.log(data[0].id)
+
+                }
+            })
+        }, 5000);
     });

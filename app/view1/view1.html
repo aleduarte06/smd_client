@@ -2,14 +2,14 @@
 <div class="col-md-8 col-md-offset-2">
     <!-- begin panel -->
     <div class="panel front-twits" data-sortable-id="ui-media-object-4">
-        <div class="panel-body" scroll-glue>
-            <ul class="media-list media-list-with-divider">
-                <li ng-repeat="tweet in tweets" class="media media-sm">
+        <div class="panel-body">
+            <ul class="media-list media-list-with-divider " scroll-glue>
+                <li ng-repeat="tweet in tweets track by tweet.id" class="media media-sm slide">
                     <a class="media-left" href="javascript:;">
                         <img ng-src="{{ tweet.user.profile_image_url }}" alt="" class="media-object rounded-corner" />
                     </a>
                     <div class="media-body">
-                        <h4 class="">@{{tweet.user.screen_name}}</h4>
+                        <h4 class="">@{{tweet.user.screen_name}}</h4><h5>{{tweet.created_at}}</h5>
                         <p>{{tweet.text}}</p>
                     </div>
                 </li>
