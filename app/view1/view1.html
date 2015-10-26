@@ -2,79 +2,16 @@
 <div class="col-md-8 col-md-offset-2">
     <!-- begin panel -->
     <div class="panel front-twits" data-sortable-id="ui-media-object-4">
-        <div class="panel-body">
-            <ul class="media-list media-list-with-divider">
+        <div class="panel-body" scroll-glue>
+            <ul ng-repeat="tweet in tweets" class="media-list media-list-with-divider">
                 <li class="media media-sm">
                     <a class="media-left" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
+                        <img ng-src="{{ tweet.user.profile_image_url }}" alt="" class="media-object rounded-corner" />
                     </a>
                     <div class="media-body">
-                        <h4 class="">Media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
+                        <h4 class="">@{{tweet.user.screen_name}}</h4>
+                        <p>{{tweet.text}}</p>
                     </div>
-                </li>
-                <li class="media media-sm">
-                    <div class="media-body text-right">
-                        <h4 class="">Nested media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio,  tempus viverra turpis.</p>
-                    </div>
-                    <a class="media-right" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
-                </li>
-                <li class="media media-sm">
-                    <a class="media-left" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
-                    <div class="media-body">
-                        <h4 class="">Media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
-                    </div>
-                </li>
-                <li class="media media-sm">
-                    <div class="media-body text-right">
-                        <h4 class="">Nested media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio,  tempus viverra turpis.</p>
-                    </div>
-                    <a class="media-right" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
-                </li>
-                <li class="media media-sm">
-                    <a class="media-left" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
-                    <div class="media-body">
-                        <h4 class="">Media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
-                    </div>
-                </li>
-                <li class="media media-sm">
-                    <div class="media-body text-right">
-                        <h4 class="">Nested media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio,  tempus viverra turpis.</p>
-                    </div>
-                    <a class="media-right" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
-                </li>
-                <li class="media media-sm">
-                    <a class="media-left" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
-                    <div class="media-body">
-                        <h4 class="">Media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
-                    </div>
-                </li>
-                <li class="media media-sm">
-                    <div class="media-body text-right">
-                        <h4 class="">Nested media heading</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio,  tempus viverra turpis.</p>
-                    </div>
-                    <a class="media-right" href="javascript:;">
-                        <img src="https://fbcdn-sphotos-f-a.akamaihd.net/hphotos-ak-xfp1/v/t1.0-9/1797491_10205207876990250_367916356386677787_n.jpg?oh=e1e3cd4dfc00fa24ab0a7795f1342767&oe=56B59C4C&__gda__=1456243653_a326c060e8b39a3d9d428e0760f24d9e" alt="" class="media-object rounded-corner" />
-                    </a>
                 </li>
             </ul>
         </div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ui.router', 'infinite-scroll'])
+angular.module('myApp.view2', ['ui.router'])
 
 .config(function($stateProvider) {
   $stateProvider.state('view2', {
