@@ -4,7 +4,8 @@
 angular.module('myApp', [
   'ui.router',
   'myApp.view1',
-  'myApp.view2'
+  'myApp.view2',
+  'myApp.config'
 
 ]).
 config(function($urlRouterProvider) {
