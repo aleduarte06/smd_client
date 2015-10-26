@@ -177,7 +177,7 @@ Website: http://www.seantheme.com/color-admin-v1.8/admin/
 /* 1.1 Reset and overrides */
 
 body {
-    background: #d9e0e7;
+    background: black;
     font-size: 12px;
     font-family: 'Open Sans', "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #707478;
@@ -2082,7 +2082,7 @@ legend {
 .media a:not(.btn):focus .media-heading,
 .media a:not(.btn).media-heading:hover,
 .media a:not(.btn).media-heading:focus {
-    color: #242a30;
+    color: lightslategrey;
     text-decoration: none;
 }
 .media-list.media-list-with-divider > li + li {
