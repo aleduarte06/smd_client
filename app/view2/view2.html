@@ -14,7 +14,7 @@
             </ul>
         </nav>
     </header>
-
+    <button ng-click="addt(3)">add</button>
     <div class="row">
         <div class="col-md-6">
             <!-- begin panel -->
@@ -29,8 +29,8 @@
                     <h4 class="panel-title">Media List with Button</h4>
                 </div>
                 <div class="panel-body">
-                    <ul class="media-list media-list-with-divider">
-                        <li class="media media-sm">
+                    <ul class="media-list media-list-with-divider" infinite-scroll="addTweet()" infinite-scroll-distance='2'>
+                        <li class="media media-sm" ng-repeat="item in list">
                             <a class="media-left" href="javascript:;">
                                 <img src="https://scontent-gru1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11892243_10206542735241067_2551104827726358792_n.jpg?oh=956ac4dbf26a18ce5a2152bc925ede32&oe=56BA9506" alt="" class="media-object rounded-corner" />
                             </a>
@@ -43,46 +43,18 @@
                                 </p>
                             </div>
                         </li>
-                        <li class="media media-sm">
-                            <a class="media-left" href="javascript:;">
-                                <img src="https://scontent-gru1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11892243_10206542735241067_2551104827726358792_n.jpg?oh=956ac4dbf26a18ce5a2152bc925ede32&oe=56BA9506" alt="" class="media-object rounded-corner" />
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Media heading</h4>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
-                                <p>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger m-r-5">Reject</a>
-                                    <a href="javascript:;" class="btn btn-sm btn-default">Cancel</a>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="media media-sm">
-                            <a class="media-left" href="javascript:;">
-                                <img src="https://scontent-gru1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11892243_10206542735241067_2551104827726358792_n.jpg?oh=956ac4dbf26a18ce5a2152bc925ede32&oe=56BA9506" alt="" class="media-object rounded-corner" />
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Media heading</h4>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
-                                <p>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger m-r-5">Reject</a>
-                                    <a href="javascript:;" class="btn btn-sm btn-default">Cancel</a>
-                                </p>
-                            </div>
-                        </li>
-                        <li class="media media-sm">
-                            <a class="media-left" href="javascript:;">
-                                <img src="https://scontent-gru1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11892243_10206542735241067_2551104827726358792_n.jpg?oh=956ac4dbf26a18ce5a2152bc925ede32&oe=56BA9506" alt="" class="media-object rounded-corner" />
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Media heading</h4>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
-                                <p>
-                                    <a href="javascript:;" class="btn btn-sm btn-danger m-r-5">Reject</a>
-                                    <a href="javascript:;" class="btn btn-sm btn-default">Cancel</a>
-                                </p>
-                            </div>
-                        </li>
-
+                        <!--<li ng-repeat="item in list" class="media media-sm">-->
+                            <!--<a class="media-left" href="javascript:;">-->
+                                <!--<img ng-src="{{ item.user.profile_image_url }}" alt="" class="media-object rounded-corner" />-->
+                            <!--</a>-->
+                            <!--<div class="media-body">-->
+                                <!--<h4 class="media-heading">{{ item.user.screen_name }}</h4>-->
+                                <!--<p>{{item.text}}<p>-->
+                                    <!--<a href="javascript:;" class="btn btn-sm btn-danger m-r-5">Reject</a>-->
+                                    <!--<a href="javascript:;" class="btn btn-sm btn-default">Cancel</a>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -154,14 +126,12 @@
                                 </p>
                             </div>
                         </li>
-
                     </ul>
                 </div>
             </div>
             <!-- end panel -->
         </div>
         <!-- end col-6 -->
-
     </div>
 </div>
 <hr/>

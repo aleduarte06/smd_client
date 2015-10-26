@@ -8,6 +8,7 @@
   "dependencies": {
     "angular": "~1.4.5",
     "angular-ui-router": "~0.2.15",
+    "ngInfiniteScroll": "1.0.0",
     "bootstrap": "~3.3.5",
     "normalize-css": "normalize.css#~3.0.3"
   }
