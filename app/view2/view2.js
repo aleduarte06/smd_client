@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
-
 .config(function($stateProvider) {
   $stateProvider.state('view2', {
     url: '/view2',
@@ -9,20 +8,76 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
     controller: 'View2Ctrl'
   });
 })
-
 .controller('View2Ctrl', function($scope, $http) {
-        $scope.variableCtrl2 = 'contenido del la variable 2';
-        console.log("controlador 2");
+        $scope.tweets = [];
+        $scope.tweetsFiltered = [];
 
-        $scope.list = [1,2,3,4,5,6];
+        $scope.isTweetCapture = false;
+        $scope.filterTweet = function (tweet) {
+            $http.post('http://127.0.0.1:3000/tweets/filtered/', tweet)
+                .then(function (response) {
+                    $scope.tweetsFiltered.push(tweet)
+                })
+                .catch(function (response) {
+                    createNotification('Error al filtrar el tweet', null)
+                });
 
-        $scope.addTweets = function() {
-            var last = $scope.images[$scope.images.length - 1];
-            for(var i = 1; i <= 8; i++) {
-                $scope.images.push(last + i);
+        };
+
+        var createNotification = function (title, text) {
+            jQuery.gritter.add({
+                title: title,
+                text: text
+            })
+        };
+
+        $scope.tweetCapture = function () {
+            if (!$scope.isTweetCapture) {
+                $http({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:3000/empezar'
+                }).then(function (response) {
+                    $scope.isTweetCapture = true;
+                    createNotification('Capturando Tweets', response.data.message)
+                }, function (response) {
+                    createNotification('Error Capturando Tweets', response.data.message)
+                })
+            } else {
+                $http({
+                    method: 'GET',
+                    url: 'http://127.0.0.1:3000/terminar'
+                }).then(function (response) {
+                    $scope.isTweetCapture = false;
+                    createNotification('Captura Finalizada', response.data.message)
+                }, function (response) {
+                    createNotification('Error Finalizando la Captura', response.data.message)
+                })
             }
         };
 
+        $scope.obtainTweets = function (cantidad, cb) {
+            $http({
+                method: 'GET',
+                url: 'http://127.0.0.1:3000/tweets/+'+cantidad
+            }).then(function (result) {
+                cb(result.data)
+            }, function (err) {
+                console.log(err)
+            })
+        };
+
+        setInterval(function () {
+            $scope.obtainTweets(1, function (data) {
+                if (data.length){
+                    if ($scope.tweets.length >= 9){
+                        $scope.tweets.splice(0,1);
+                        $scope.tweets.push(data[0]);
+                    } else {
+                        $scope.tweets.push(data[0]);
+                    }
+                }
+            })
+        }, 5000);
 })
 .controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
 

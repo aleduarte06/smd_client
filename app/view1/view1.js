@@ -14,7 +14,7 @@ angular.module('myApp.view1', ['ui.router', 'luegg.directives', 'ngAnimate'])
         $scope.obtainTweets = function (cantidad, cb) {
             $http({
                 method: 'GET',
-                url: 'http://127.0.0.1:3000/tweets/+'+cantidad
+                url: 'http://127.0.0.1:3000/tweets/filtered/+'+cantidad
             }).then(function (result) {
                 cb(result.data)
             }, function (err) {

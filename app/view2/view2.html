@@ -20,8 +20,8 @@
     <div class="panel panel-inverse panel-back" data-sortable-id="ui-media-object-4">
         <div class="panel-heading">
             <div class="panel-heading-btn ">
-                <a class="btn btn-sm btn-success" >Inicio</a>
-                <a class="btn btn-sm btn-danger" >Stop</a>
+                <a id="btn-iniciar" ng-if="!isTweetCapture"  ng-click="tweetCapture()" class="btn btn-sm btn-success animate-if" >Inicio</a>
+                <a ng-if="isTweetCapture" ng-click="tweetCapture()" class="btn btn-sm btn-danger animate-if" >Stop</a>
                 <a class="btn btn-sm btn-warning" >algo</a>
                 <a class="btn btn-sm btn-default" >algo</a>
             </div>
@@ -29,15 +29,15 @@
         </div>
         <div class="panel-body">
             <ul class="media-list media-list-with-divider" infinite-scroll="addTweet()" infinite-scroll-distance='2'>
-                <li class="media media-sm" ng-repeat="item in list">
+                <li class="media media-sm" ng-repeat="tweet in tweets">
                     <a class="media-left">
-                        <img src="https://scontent-gru1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11892243_10206542735241067_2551104827726358792_n.jpg?oh=956ac4dbf26a18ce5a2152bc925ede32&oe=56BA9506" alt="" class="media-object rounded-corner" />
+                        <img ng-src="{{ tweet.user.profile_image_url }}" alt="" class="media-object rounded-corner" />
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">@aleduarte06</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
+                        <h4 class="media-heading">@{{ tweet.user.screen_name }}</h4>
+                        <p> {{ tweet.text }}</p>
                         <p>
-                            <a class="btn btn-sm btn-success m-r-5">Mostrar</a>
+                            <a ng-click="filterTweet(tweet)" class="btn btn-sm btn-success m-r-5">Mostrar</a>
                             <!--<a class="btn btn-sm btn-default">Cancel</a>-->
                         </p>
                     </div>
@@ -60,14 +60,14 @@
             <h4 class="panel-title">Mensajes Recibidos</h4>
         </div>
         <div class="panel-body">
-            <ul class="media-list media-list-with-divider" infinite-scroll="addTweet()" infinite-scroll-distance='2'>
-                <li class="media media-sm" ng-repeat="item in list">
+            <ul class="media-list media-list-with-divider">
+                <li class="media media-sm" ng-repeat="tweet in tweetsFiltered track by tweet.id">
                     <a class="media-left">
-                        <img src="https://scontent-gru1-1.xx.fbcdn.net/hphotos-xfp1/v/t1.0-9/11892243_10206542735241067_2551104827726358792_n.jpg?oh=956ac4dbf26a18ce5a2152bc925ede32&oe=56BA9506" alt="" class="media-object rounded-corner" />
+                        <img ng-src="{{ tweet.user.profile_image_url}}" alt="" class="media-object rounded-corner" />
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">@aleduarte06</h4>
-                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, tempus viverra turpis.</p>
+                        <h4 class="media-heading">@{{ tweet.user.screen_name }}</h4>
+                        <p> {{ tweet.text }}</p>
                         <p>
                             <a class="btn btn-sm btn-danger m-r-5">No mostrar</a>
                             <!--<a class="btn btn-sm btn-default">Cancel</a>-->
