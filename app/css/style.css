@@ -2039,7 +2039,7 @@ legend {
 .modal-message .modal-header,
 .modal-message .modal-body,
 .modal-message .modal-footer {
-    width: 60%;
+    width: 96%;
     border: none;
     margin: 0 auto;
 }

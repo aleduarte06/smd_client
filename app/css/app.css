@@ -125,7 +125,17 @@ html{
     padding-top: 18px;
 }
 
-li {
+.panel-front li {
     height: 155px;
     position: relative;
+}
+.panel-back{
+    overflow: hidden;
+}
+.panel-back li{
+    padding-top: 14px;
+    height: 120px;
+}
+.panel-heading-btn{
+    margin-top: -5px;
 }

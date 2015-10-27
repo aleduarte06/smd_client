@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ui.router'])
+angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
 
 .config(function($stateProvider) {
   $stateProvider.state('view2', {
@@ -23,24 +23,52 @@ angular.module('myApp.view2', ['ui.router'])
             }
         };
 
-        //if ($scope.list.length === 0) {
-        //    $http({
-        //        method: "GET",
-        //        url: "http://127.0.0.1:3000/tweets/+"+5
-        //    }).then(function (result) {
-        //        $scope.list = result.data
-        //    })
-        //}
-        //
-        //$scope.addTweets = function () {
-        //    $http({
-        //        method: "GET",
-        //        url: "http://127.0.0.1:3000/tweets/+"+5
-        //    }).then(function (result) {
-        //        for (var tweet of result) {
-        //            $scope.list.push(tweet);
-        //        }
-        //    })
-        //};
+})
+.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
 
+    $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (size) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'view2/modal-config.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            windowClass:'modal-message',
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+
+})
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
