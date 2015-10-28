@@ -8,29 +8,11 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
     controller: 'View2Ctrl'
   });
 })
-.controller('View2Ctrl', function($scope, $http) {
+.controller('View2Ctrl', function($scope, $http, socket) {
         $scope.tweets = [];
+
         $scope.tweetsFiltered = [];
-
         $scope.isTweetCapture = false;
-        $scope.filterTweet = function (tweet) {
-            $http.post('http://127.0.0.1:3000/tweets/filtered/', tweet)
-                .then(function (response) {
-                    $scope.tweetsFiltered.push(tweet)
-                })
-                .catch(function (response) {
-                    createNotification('Error al filtrar el tweet', null)
-                });
-
-        };
-
-        var createNotification = function (title, text) {
-            jQuery.gritter.add({
-                title: title,
-                text: text
-            })
-        };
-
         $scope.tweetCapture = function () {
             if (!$scope.isTweetCapture) {
                 $http({
@@ -55,29 +37,41 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
             }
         };
 
-        $scope.obtainTweets = function (cantidad, cb) {
-            $http({
-                method: 'GET',
-                url: 'http://127.0.0.1:3000/tweets/+'+cantidad
-            }).then(function (result) {
-                cb(result.data)
-            }, function (err) {
-                console.log(err)
+        $scope.filterTweet = function (tweet) {
+            $http.post('http://127.0.0.1:3000/tweets/filtered/', tweet)
+                .then(function (response) {
+                    if(response.data.data.inserted){
+                        $scope.tweetsFiltered.push(tweet)
+                    }
+                })
+                .catch(function (response) {
+                    createNotification('Error al filtrar el tweet', null)
+                });
+
+        };
+
+        socket.on('tweet', onTweetReceive);
+
+        function onTweetReceive(data){
+            if (data) {
+                $scope.tweets.push(data)
+            }
+            deleteTweet()
+        }
+
+        function deleteTweet () {
+            if ($scope.tweets.length > 8) {
+                $scope.tweets.shift()
+            }
+        }
+
+        var createNotification = function (title, text) {
+            jQuery.gritter.add({
+                title: title,
+                text: text
             })
         };
 
-        setInterval(function () {
-            $scope.obtainTweets(1, function (data) {
-                if (data.length){
-                    if ($scope.tweets.length >= 9){
-                        $scope.tweets.splice(0,1);
-                        $scope.tweets.push(data[0]);
-                    } else {
-                        $scope.tweets.push(data[0]);
-                    }
-                }
-            })
-        }, 5000);
 })
 .controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
 

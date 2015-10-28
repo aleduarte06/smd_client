@@ -129,9 +129,9 @@ html{
     height: 155px;
     position: relative;
 }
-.panel-back{
-    overflow: hidden;
-}
+/*.panel-back{*/
+    /*overflow: hidden;*/
+/*}*/
 .panel-back li{
     padding-top: 14px;
     height: 120px;

@@ -8,34 +8,19 @@ angular.module('myApp.view1', ['ui.router', 'luegg.directives', 'ngAnimate'])
             controller: 'View1Ctrl'
         });
     })
-    .controller('View1Ctrl', function($scope, $http) {
+    .controller('View1Ctrl', function($scope, $http, socket) {
         $scope.tweets = [];
 
-        $scope.obtainTweets = function (cantidad, cb) {
-            $http({
-                method: 'GET',
-                url: 'http://127.0.0.1:3000/tweets/filtered/+'+cantidad
-            }).then(function (result) {
-                cb(result.data)
-            }, function (err) {
-                console.log(err)
-            })
-        };
+        function deleteTweet () {
+            if ($scope.tweets.length > 4) {
+                $scope.tweets.shift()
+            }
+        }
 
-        setInterval(function () {
-            $scope.obtainTweets(1, function (data) {
-                if (data.length){
-                    if ($scope.tweets.length >= 9){
-                        var element = document.querySelector('.media-list').firstElementChild;
-                            $scope.tweets.splice(0,1);
-                            $scope.tweets.push(data[0]);
-
-                    } else {
-                        $scope.tweets.push(data[0]);
-                    }
-                    console.log(data[0].id)
-
-                }
-            })
-        }, 5000);
+        socket.on('tweetFiltered', function (result) {
+            if (result) {
+                $scope.tweets.push(result);
+            }
+            deleteTweet()
+        });
     });
