@@ -41,7 +41,7 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
             if (!$scope.isTweetCapture) {
                 $http({
                     method: 'GET',
-                    url: 'http://127.0.0.1:3000/empezar'
+                    url: 'http://45.55.41.25:3000/empezar'
                 }).then(function (response) {
                     $scope.isTweetCapture = true;
                     createNotification('Capturando Tweets', response.data.message)
@@ -51,7 +51,7 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
             } else {
                 $http({
                     method: 'GET',
-                    url: 'http://127.0.0.1:3000/terminar'
+                    url: 'http://45.55.41.25:3000/terminar'
                 }).then(function (response) {
                     $scope.isTweetCapture = false;
                     createNotification('Captura Finalizada', response.data.message)
@@ -62,7 +62,7 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
         };
 
         $scope.filterTweet = function (tweet) {
-            $http.post('http://127.0.0.1:3000/tweets/filtered/', tweet)
+            $http.post('http://45.55.41.25:3000/tweets/filtered/', tweet)
                 .then(function (response) {
                     if(response.data.data.inserted){
                         $scope.tweetsFiltered.push(tweet)
@@ -118,7 +118,7 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
 
         modalInstance.result.then(function (config) {
             $scope.config = config;
-            $http.post('http://127.0.0.1:3000/config', config)
+            $http.post('http://45.55.41.25:3000/config', config)
                 .then(function (response) {
                     jQuery.gritter.add({
                         title: 'asd',
