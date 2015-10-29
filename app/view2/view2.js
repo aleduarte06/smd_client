@@ -10,9 +10,33 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
 })
 .controller('View2Ctrl', function($scope, $http, socket) {
         $scope.tweets = [];
-
+        $scope.asd = function () {socket.emit('asd')};
         $scope.tweetsFiltered = [];
         $scope.isTweetCapture = false;
+        $scope.isTweetShow = false;
+        $scope.tweetShow = function () {
+            if ($scope.isTweetShow) {
+                socket.emit('tweetStop');
+                $scope.isTweetShow = false
+            } else {
+                socket.emit('tweetShow', function () {
+                    console.log('error')
+                });
+                $scope.isTweetShow = true
+            }
+        };
+
+        $scope.isTweetFilteredShow = false;
+        $scope.tweetFilteredShow = function () {
+            if ($scope.isTweetFilteredShow) {
+                socket.emit('tweetFilteredStop');
+                $scope.isTweetFilteredShow = false
+            } else {
+                socket.emit('tweetFilteredShow');
+                $scope.isTweetFilteredShow = true
+            }
+
+        };
         $scope.tweetCapture = function () {
             if (!$scope.isTweetCapture) {
                 $http({
@@ -45,7 +69,7 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
                     }
                 })
                 .catch(function (response) {
-                    createNotification('Error al filtrar el tweet', null)
+                    createNotification('Error al filtrar el tweet', response.data.message)
                 });
 
         };
@@ -60,7 +84,7 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
         }
 
         function deleteTweet () {
-            if ($scope.tweets.length > 8) {
+            if ($scope.tweets.length > 100) {
                 $scope.tweets.shift()
             }
         }
@@ -73,11 +97,9 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
         };
 
 })
-.controller('ModalDemoCtrl', function ($scope, $uibModal, $log) {
-
-    $scope.items = ['item1', 'item2', 'item3'];
-
+.controller('ModalDemoCtrl', function ($scope, $uibModal, $log, $http) {
     $scope.animationsEnabled = true;
+    $scope.config = {};
 
     $scope.open = function (size) {
 
@@ -88,14 +110,23 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
             size: size,
             windowClass:'modal-message',
             resolve: {
-                items: function () {
-                    return $scope.items;
+                config: function () {
+                    return $scope.config;
                 }
             }
         });
 
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
+        modalInstance.result.then(function (config) {
+            $scope.config = config;
+            $http.post('http://127.0.0.1:3000/config', config)
+                .then(function (response) {
+                    jQuery.gritter.add({
+                        title: 'asd',
+                        text: response.data.message
+                    })
+                }, function errorCallback(response) {
+                    console.log(response)
+                })
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
@@ -106,15 +137,11 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
     };
 
 })
-.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-
-    $scope.items = items;
-    $scope.selected = {
-        item: $scope.items[0]
-    };
+.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, config) {
+    $scope.config = config;
 
     $scope.ok = function () {
-        $uibModalInstance.close($scope.selected.item);
+        $uibModalInstance.close($scope.config);
     };
 
     $scope.cancel = function () {

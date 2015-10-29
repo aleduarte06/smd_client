@@ -11,16 +11,19 @@ angular.module('myApp.view1', ['ui.router', 'luegg.directives', 'ngAnimate'])
     .controller('View1Ctrl', function($scope, $http, socket) {
         $scope.tweets = [];
 
-        function deleteTweet () {
-            if ($scope.tweets.length > 4) {
+        function deleteTweet (num) {
+            if ($scope.tweets.length > num) {
                 $scope.tweets.shift()
             }
         }
 
         socket.on('tweetFiltered', function (result) {
+            console.log(result);
             if (result) {
                 $scope.tweets.push(result);
+                deleteTweet(8)
+            } else {
+                deleteTweet(4)
             }
-            deleteTweet()
         });
     });

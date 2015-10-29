@@ -8,37 +8,19 @@
                 <fieldset class="form-group">
                     <label class="col-md-3 control-label">Nombre Evento</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="Nombre del Evento"/>
+                        <input ng-model="config.eventName" type="text" class="form-control" placeholder="Nombre del Evento"/>
                     </div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label class="col-md-3 control-label">Twittet</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="Ingrese un #HashTag a seguir"/>
+                        <input ng-model="config.tweetFilter" type="text" class="form-control" placeholder="Ingrese un #HashTag a seguir"/>
                     </div>
                 </fieldset>
                 <fieldset class="form-group">
                     <label class="col-md-3 control-label">Imagen de Fondo</label>
                     <div class="col-md-9">
                         <input class="btn btn-toolbar" type="file"/>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label class="col-md-3 control-label">Servidor bd</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="ip del servidor de bases de datos"/>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label class="col-md-3 control-label">Name Database</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="Nombre de la base de datos"/>
-                    </div>
-                </fieldset>
-                <fieldset class="form-group">
-                    <label class="col-md-3 control-label">Contraseña</label>
-                    <div class="col-md-9">
-                        <input type="password" class="form-control" placeholder="Contraseña bd"/>
                     </div>
                 </fieldset>
             </form>
@@ -48,15 +30,15 @@
         <div class="modal-body">
             <form action="" class="form-horizontal">
                 <fieldset class="form-group">
-                    <label class="col-md-3 control-label">Tiempo Actualizacion</label>
+                    <label class="col-md-3 control-label">Tiempo Actualizacion Tweets</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="Tiempo en segundos"/>
+                        <input ng-model="config.refreshTimeTweet" type="number" class="form-control" placeholder="Tiempo en segundos (default 5 segundos)"/>
                     </div>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label class="col-md-3 control-label">--------</label>
+                    <label class="col-md-3 control-label">Tiempo Actualizacion Tweets Filtrados</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="----------------"/>
+                        <input ng-model="config.refreshTimeTweetFiltered" type="text" class="form-control" placeholder="Tiempo en segundos (default 5 segundos)"/>
                     </div>
                 </fieldset>
                 <fieldset class="form-group">

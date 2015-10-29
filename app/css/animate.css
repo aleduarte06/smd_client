@@ -27,10 +27,20 @@
     position: relative;
 }
 #btn-iniciar.ng-enter {
-    right: -58px;
+    right: -116px;
 }
 #btn-iniciar.ng-leave {
-    right: -58px;
+    right: -116px;
+}
+
+#tweetShow {
+    position: relative;
+}
+#tweetShow.ng-enter {
+    right: -120px;
+}
+#tweetShow.ng-leave {
+    right: -120px;
 }
 
 .animate-if.ng-leave, .animate-if.ng-enter.ng-enter-active {
