@@ -1,15 +1,9 @@
 'use strict';
 
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
-    'ui.router',
-    'myApp.view1',
-    'myApp.view2',
-    'myApp.config'
-])
-    .config(function($urlRouterProvider) {
-        $urlRouterProvider.otherwise('/view1');
-    })
+angular.module('front', [
+    'ui.router'
+    ])
     .factory('socket', function ($rootScope) {
         var socket = io('http://45.55.41.25:3000');
         return {
@@ -32,4 +26,23 @@ angular.module('myApp', [
                 })
             }
         }
+    })
+    .controller('View1Ctrl', function($scope, $http, socket) {
+        $scope.tweets = [];
+
+        function deleteTweet (num) {
+            if ($scope.tweets.length > num) {
+                $scope.tweets.shift()
+            }
+        }
+
+        socket.on('tweetFiltered', function (result) {
+            console.log(result);
+            if (result) {
+                $scope.tweets.push(result);
+                deleteTweet(8)
+            } else {
+                deleteTweet(4)
+            }
+        });
     });

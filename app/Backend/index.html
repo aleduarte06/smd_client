@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Social message in real time</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/jquery.gritter/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="View2Ctrl" class="contenedor-index">
+
+        <nav class="navbar navbar-inverse" ng-controller="ModalDemoCtrl">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand">Smd</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li ng-click="open()"><a class="btn">Config</a></li>
+                        <li><a class="btn">Link</a></li>
+                        <li><a class="btn">Link</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="col-md-6">
+            <!-- begin panel -->
+            <div class="panel panel-inverse panel-back" data-sortable-id="ui-media-object-4">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn ">
+                        <a id="btn-iniciar" ng-if="!isTweetCapture"  ng-click="tweetCapture()" class="btn btn-sm btn-success animate-if" >Iniciar Captura</a>
+                        <a ng-if="isTweetCapture" ng-click="tweetCapture()" class="btn btn-sm btn-danger animate-if" >Frenar Captura</a>
+                        <a ng-click="asd()" class="btn btn-sm btn-default" >algo</a>
+                        <a id="tweetShow" ng-if="!isTweetShow" ng-click="tweetShow()" class="btn btn-sm btn-warning" >Mostrar Capturas</a>
+                        <a ng-if="isTweetShow" ng-click="tweetShow()" class="btn btn-sm btn-danger"> Frenar Mostrado</a>
+                    </div>
+                    <h4 class="panel-title">Mensajes Recibidos</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list media-list-with-divider">
+                        <li class="media media-sm" ng-repeat="tweet in tweets">
+                            <a class="media-left">
+                                <img ng-src="{{ tweet.user.profile_image_url }}" alt="" class="media-object rounded-corner" />
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">@{{ tweet.user.screen_name }}</h4>
+                                <p> {{ tweet.text }}</p>
+                                <p>
+                                    <a ng-click="filterTweet(tweet)" class="btn btn-sm btn-success m-r-5">Mostrar</a>
+                                    <!--<a class="btn btn-sm btn-default">Cancel</a>-->
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+        <div class="col-md-6">
+            <!-- begin panel -->
+            <div class="panel panel-inverse panel-back" data-sortable-id="ui-media-object-4">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a ng-if="!isTweetFilteredShow" ng-click="tweetFilteredShow()" class="btn btn-sm btn-warning" >Iniciar Mostrado</a>
+                        <a ng-if="isTweetFilteredShow" ng-click="tweetFilteredShow()" class="btn btn-sm btn-danger" >Frenar Mostrado</a>
+                    </div>
+                    <h4 class="panel-title">Mensajes Filtrados</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="media-list media-list-with-divider">
+                        <li class="media media-sm" ng-repeat="tweet in tweetsFiltered track by tweet.id">
+                            <a class="media-left">
+                                <img ng-src="{{ tweet.user.profile_image_url}}" alt="" class="media-object rounded-corner" />
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">@{{ tweet.user.screen_name }}</h4>
+                                <p> {{ tweet.text }}</p>
+                                <p>
+                                    <a class="btn btn-sm btn-danger m-r-5">No mostrar</a>
+                                    <!--<a class="btn btn-sm btn-default">Cancel</a>-->
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end panel -->
+        </div>
+        <div class="row footer">
+            <div class="col-md-3 col-sm-6">
+                <div class="widget widget-stats bg-black">
+                    <div class="stats-icon stats-icon-lg"><i class="fa fa-comments fa-fw"></i></div>
+                    <div class="stats-title">Mensajes Recibidos</div>
+                    <div class="stats-number">3,988</div>
+                    <div class="stats-progress progress">
+                        <div class="progress-bar" style="width: 54.9%;"></div>
+                    </div>
+                    <div class="stats-desc">Better than last week (54.9%)</div>
+                </div>
+            </div>
+            <!-- end col-3 -->
+        </div>
+
+    </div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/jquery.gritter/js/jquery.gritter.min.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="../bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="http://45.55.41.25:3000/socket.io/socket.io.js"></script>
+    <script src="js/app.js"></script>
+    <script src="backend-config/config.js"></script>
+    <!--<script src="components/version/version.js"></script>-->
+    <!--<script src="components/version/version-directive.js"></script>-->
+    <!--<script src="components/version/interpolate-filter.js"></script>-->
+</body>
+</html>

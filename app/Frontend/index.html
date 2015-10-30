@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Social message in real time</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/jquery.gritter/css/jquery.gritter.css">
+    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <!--<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>-->
+</head>
+
+<body ng-app="front">
+<div ng-controller="View1Ctrl" class="contenedor-index">
+    <div class="col-md-8 col-md-offset-2">
+        <!-- begin panel -->
+        <div class="panel front-twits" data-sortable-id="ui-media-object-4">
+            <div class="panel-body panel-front">
+                <ul class="media-list media-list-with-divider " scroll-glue>
+                    <li ng-repeat="tweet in tweets track by tweet.id" class="media media-sm slide">
+                        <a class="media-left" href="javascript:;">
+                            <img ng-src="{{ tweet.user.profile_image_url }}" alt="" class="media-object rounded-corner" />
+                        </a>
+                        <div class="media-body">
+                            <h4 class="">@{{tweet.user.screen_name}}</h4><h5>{{tweet.created_at}}</h5>
+                            <p>{{tweet.text}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!--</div>-->
+            <!-- end panel -->
+        </div>
+    </div>
+</div>
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="../bower_components/angular-scroll-glue/src/scrollglue.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="http://45.55.41.25:3000/socket.io/socket.io.js"></script>
+<script src="js/app.js"></script>
+<!--<script src="components/version/version.js"></script>-->
+<!--<script src="components/version/version-directive.js"></script>-->
+<!--<script src="components/version/interpolate-filter.js"></script>-->
+</body>
+</html>

@@ -1,14 +1,33 @@
 'use strict';
 
-angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
-.config(function($stateProvider) {
-  $stateProvider.state('view2', {
-    url: '/view2',
-    templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
-  });
-})
-.controller('View2Ctrl', function($scope, $http, socket) {
+// Declare app level module which depends on views, and components
+angular.module('myApp', [
+    'ui.router','ui.bootstrap'
+    ])
+    .factory('socket', function ($rootScope) {
+        var socket = io('http://45.55.41.25:3000');
+        return {
+            on: function (eventName, callback) {
+                socket.on(eventName, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        callback.apply(socket, args)
+                    })
+                })
+            },
+            emit: function (eventName, data, callback) {
+                socket.emit(eventName, data, function () {
+                    var args = arguments;
+                    $rootScope.$apply(function () {
+                        if (callback) {
+                            callback.apply(socket, args);
+                        }
+                    });
+                })
+            }
+        }
+    })
+    .controller('View2Ctrl', function($scope, $http, socket) {
         $scope.tweets = [];
         $scope.asd = function () {socket.emit('asd')};
         $scope.tweetsFiltered = [];
@@ -96,55 +115,55 @@ angular.module('myApp.view2', ['ui.router','ui.bootstrap'])
             })
         };
 
-})
-.controller('ModalDemoCtrl', function ($scope, $uibModal, $log, $http) {
-    $scope.animationsEnabled = true;
-    $scope.config = {};
+    })
+    .controller('ModalDemoCtrl', function ($scope, $uibModal, $log, $http) {
+        $scope.animationsEnabled = true;
+        $scope.config = {};
 
-    $scope.open = function (size) {
+        $scope.open = function (size) {
 
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'view2/modal-config.html',
-            controller: 'ModalInstanceCtrl',
-            size: size,
-            windowClass:'modal-message',
-            resolve: {
-                config: function () {
-                    return $scope.config;
+            var modalInstance = $uibModal.open({
+                animation: $scope.animationsEnabled,
+                templateUrl: '/modal-config.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                windowClass:'modal-message',
+                resolve: {
+                    config: function () {
+                        return $scope.config;
+                    }
                 }
-            }
-        });
+            });
 
-        modalInstance.result.then(function (config) {
-            $scope.config = config;
-            $http.post('http://45.55.41.25:3000/config', config)
-                .then(function (response) {
-                    jQuery.gritter.add({
-                        title: 'asd',
-                        text: response.data.message
+            modalInstance.result.then(function (config) {
+                $scope.config = config;
+                $http.post('http://45.55.41.25:3000/config', config)
+                    .then(function (response) {
+                        jQuery.gritter.add({
+                            title: 'asd',
+                            text: response.data.message
+                        })
+                    }, function errorCallback(response) {
+                        console.log(response)
                     })
-                }, function errorCallback(response) {
-                    console.log(response)
-                })
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
-    };
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
-    $scope.toggleAnimation = function () {
-        $scope.animationsEnabled = !$scope.animationsEnabled;
-    };
+        $scope.toggleAnimation = function () {
+            $scope.animationsEnabled = !$scope.animationsEnabled;
+        };
 
-})
-.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, config) {
-    $scope.config = config;
+    })
+    .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, config) {
+        $scope.config = config;
 
-    $scope.ok = function () {
-        $uibModalInstance.close($scope.config);
-    };
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.config);
+        };
 
-    $scope.cancel = function () {
-        $uibModalInstance.dismiss('cancel');
-    };
-});
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    });

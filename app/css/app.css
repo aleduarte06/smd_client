@@ -132,6 +132,9 @@ html{
 /*.panel-back{*/
     /*overflow: hidden;*/
 /*}*/
+.panel-back .panel-body{
+  overflow-y: auto;
+}
 .panel-back li{
     padding-top: 14px;
     height: 120px;

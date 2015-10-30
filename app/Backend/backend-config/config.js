@@ -5,7 +5,7 @@ angular.module('myApp.config', ['ui.router'])
 .config(function($stateProvider) {
   $stateProvider.state('config', {
     url: '/config',
-    templateUrl: 'backend-config/config.html',
+    templateUrl: '/config.html',
     controller: 'ConfigCtrl'
   });
 })
