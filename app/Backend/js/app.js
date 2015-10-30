@@ -124,7 +124,7 @@ angular.module('myApp', [
 
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: '/modal-config.html',
+                templateUrl:'js/modal-config.html',
                 controller: 'ModalInstanceCtrl',
                 size: size,
                 windowClass:'modal-message',

@@ -177,10 +177,11 @@ Website: http://www.seantheme.com/color-admin-v1.8/admin/
 /* 1.1 Reset and overrides */
 
 body {
-    background: url(../img/background.jpg) no-repeat center;
+    background: #1a2229;
     font-size: 12px;
     font-family: 'Open Sans', "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #707478;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#c46832+8,2f8359+44,14636c+68,183956+91 */
 }
 .ie8 body {
     font-family: Arial,sans-serif;
