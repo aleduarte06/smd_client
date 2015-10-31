@@ -141,3 +141,17 @@ html{
 .panel-heading-btn{
     margin-top: -5px;
 }
+#header{
+  position: inherit;
+}
+.dropdown-menu{
+    background: #2D353C;
+}
+
+.dropdown-menu li a{
+    color:#a8acb1;
+}
+
+.text-white {
+    color: #fff !important;
+}

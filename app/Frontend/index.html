@@ -17,7 +17,10 @@
 </head>
 
 <body ng-app="front">
-<div ng-controller="View1Ctrl" class="contenedor-index">
+<div ng-controller="View1Ctrl" ng-init="evento= {hashtag:'Nike'}">
+    <div class="text-center " >
+        <h1 class="text-white">#{{evento.hashtag}}</h1>
+    </div>
     <div class="col-md-8 col-md-offset-2">
         <!-- begin panel -->
         <div class="panel front-twits" data-sortable-id="ui-media-object-4">
